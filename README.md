@@ -1,97 +1,183 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+# 📱 Matjido
 
-# Getting Started
+React Native로 개발된 맛집 지도 기반 모바일 애플리케이션입니다.
 
-> **Note**: Make sure you have completed the [Set Up Your Environment](https://reactnative.dev/docs/set-up-your-environment) guide before proceeding.
+지도에서 주변 맛집을 탐색하고, 리뷰를 작성하며, 캘린더로 방문 기록을 관리할 수 있습니다.
 
-## Step 1: Start Metro
+## ✨ 주요 기능
 
-First, you will need to run **Metro**, the JavaScript build tool for React Native.
+### 🗺️ 지도 기능
 
-To start the Metro dev server, run the following command from the root of your React Native project:
+- **맛집 마커 표시**: 지도에서 주변 맛집을 마커로 표시
+- **마커 클러스터링**: 줌 레벨에 따라 마커를 자동으로 그룹화
+- **마커 필터링**: 색상(5가지) 및 평점(1-5점)별로 맛집 필터링
+- **위치 검색**: 지역 검색을 통한 지도 이동
+- **현재 위치**: 사용자 현재 위치 표시 및 이동
 
-```sh
-# Using npm
+### 📝 피드 기능
+
+- **맛집 리스트**: 등록된 맛집 목록 조회
+- **맛집 상세**: 맛집 정보, 리뷰, 이미지 확인
+- **리뷰 작성/수정**: 맛집에 대한 리뷰 및 평점 작성
+- **이미지 업로드**: 맛집 사진 업로드 및 관리
+- **즐겨찾기**: 좋아하는 맛집 저장 및 관리
+
+### 📅 캘린더 기능
+
+- **방문 기록**: 날짜별 맛집 방문 기록 확인
+- **연도 선택**: 원하는 연도의 기록 조회
+
+### 👤 사용자 기능
+
+- **이메일/비밀번호 로그인**: 기본 회원가입 및 로그인
+- **카카오 로그인**: 소셜 로그인 지원
+- **토큰 기반 인증**: AccessToken/RefreshToken을 통한 보안 인증
+- **프로필 관리**: 사용자 프로필 수정 (닉네임, 프로필 이미지)
+- **다크 모드**: 라이트/다크 테마 전환 및 시스템 테마 지원
+
+## 🛠 기술 스택
+
+### Core
+
+- **React Native** `0.79.4` - 크로스 플랫폼 모바일 프레임워크
+- **TypeScript** `5.0.4` - 정적 타입 지원
+- **React** `19.0.0` - UI 라이브러리
+
+### Navigation
+
+- **React Navigation** - 화면 라우팅
+  - `@react-navigation/stack` - 스택 내비게이션
+  - `@react-navigation/drawer` - 드로어 내비게이션
+
+### State Management
+
+- **Zustand** `5.0.8` - 경량 상태 관리
+- **TanStack Query** `5.90.5` - 서버 상태 관리 및 캐싱
+
+### Maps & Location
+
+- **react-native-maps** `1.23.12` - 지도 컴포넌트
+- **react-native-map-clustering** `4.0.0` - 마커 클러스터링
+- **@react-native-community/geolocation** `3.4.0` - 위치 정보
+
+### API & Storage
+
+- **Axios** `1.13.1` - HTTP 클라이언트 (플랫폼별 baseURL 자동 설정)
+- **@react-native-async-storage/async-storage** `2.2.0` - 비동기 스토리지
+- **react-native-encrypted-storage** `4.0.3` - 암호화 스토리지 (토큰 저장)
+
+### UI/UX
+
+- **react-native-bootsplash** `6.3.11` - 부팅 스플래시 화면
+- **react-native-toast-message** `2.3.3` - 토스트 메시지
+- **react-native-image-crop-picker** `0.51.1` - 이미지 선택 및 편집
+- **react-native-date-picker** `5.0.12` - 날짜 선택기
+- **@react-native-vector-icons** - 아이콘 라이브러리 (FontAwesome6, Ionicons)
+- **react-error-boundary** `6.0.0` - 에러 바운더리 (재시도 기능 포함)
+
+### Permissions
+
+- **react-native-permissions** `5.4.3` - 권한 관리
+
+### Development
+
+- **ESLint** - 코드 린팅
+- **Prettier** - 코드 포맷팅
+- **patch-package** - 패키지 패치 관리
+
+## 📂 프로젝트 구조
+
+```
+src/
+├── api/                   # API 관련 코드
+├── assets/                # 정적 파일
+├── components/            # 재사용 가능한 컴포넌트
+├── constants/             # 상수 정의
+├── hooks/                 # 커스텀 훅
+├── navigations/           # 내비게이션 설정
+├── screens/               # 화면 컴포넌트
+├── store/                 # Zustand 스토어
+├── types/                 # TypeScript 타입 정의
+└── utils/                 # 유틸리티 함수
+```
+
+## 🚀 시작하기
+
+### 필수 요구사항
+
+- **Node.js** >= 18
+- **npm** 또는 **yarn**
+- **React Native 개발 환경**
+  - iOS: Xcode, CocoaPods
+  - Android: Android Studio, JDK
+
+### 설치
+
+1. 저장소 클론
+
+   ```bash
+   git clone <repository-url>
+   cd matjido
+   ```
+
+2. 의존성 설치
+
+   ```bash
+   npm install
+   # 또는
+   yarn install
+   ```
+
+3. iOS 의존성 설치 (iOS만 해당)
+
+   ```bash
+   cd ios
+   pod install
+   cd ..
+   ```
+
+4. 환경 변수 설정
+
+   프로젝트 루트에 `.env` 파일을 생성하고 필요한 환경 변수를 설정하세요.
+
+   ```env
+   KAKAO_APP_KEY=your_kakao_app_key
+   GOOGLE_MAPS_API_KEY=your_google_maps_api_key
+   ```
+
+5. API 서버 설정
+
+   개발 환경에서 API 서버가 실행 중이어야 합니다.
+
+   기본 설정:
+
+   - iOS: `http://localhost:3030`
+   - Android: `http://10.0.2.2:3030`
+
+   `src/api/axios.ts`에서 baseURL을 수정할 수 있습니다.
+
+### 실행
+
+#### Metro Bundler 시작
+
+```bash
 npm start
-
-# OR using Yarn
+# 또는
 yarn start
 ```
 
-## Step 2: Build and run your app
+#### iOS 실행
 
-With Metro running, open a new terminal window/pane from the root of your React Native project, and use one of the following commands to build and run your Android or iOS app:
-
-### Android
-
-```sh
-# Using npm
-npm run android
-
-# OR using Yarn
-yarn android
-```
-
-### iOS
-
-For iOS, remember to install CocoaPods dependencies (this only needs to be run on first clone or after updating native deps).
-
-The first time you create a new project, run the Ruby bundler to install CocoaPods itself:
-
-```sh
-bundle install
-```
-
-Then, and every time you update your native dependencies, run:
-
-```sh
-bundle exec pod install
-```
-
-For more information, please visit [CocoaPods Getting Started guide](https://guides.cocoapods.org/using/getting-started.html).
-
-```sh
-# Using npm
+```bash
 npm run ios
-
-# OR using Yarn
+# 또는
 yarn ios
 ```
 
-If everything is set up correctly, you should see your new app running in the Android Emulator, iOS Simulator, or your connected device.
+#### Android 실행
 
-This is one way to run your app — you can also build it directly from Android Studio or Xcode.
-
-## Step 3: Modify your app
-
-Now that you have successfully run the app, let's make changes!
-
-Open `App.tsx` in your text editor of choice and make some changes. When you save, your app will automatically update and reflect these changes — this is powered by [Fast Refresh](https://reactnative.dev/docs/fast-refresh).
-
-When you want to forcefully reload, for example to reset the state of your app, you can perform a full reload:
-
-- **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Dev Menu**, accessed via <kbd>Ctrl</kbd> + <kbd>M</kbd> (Windows/Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (macOS).
-- **iOS**: Press <kbd>R</kbd> in iOS Simulator.
-
-## Congratulations! :tada:
-
-You've successfully run and modified your React Native App. :partying_face:
-
-### Now what?
-
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [docs](https://reactnative.dev/docs/getting-started).
-
-# Troubleshooting
-
-If you're having issues getting the above steps to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
-
-# Learn More
-
-To learn more about React Native, take a look at the following resources:
-
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
+```bash
+npm run android
+# 또는
+yarn android
+```
