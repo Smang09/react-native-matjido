@@ -1,4 +1,4 @@
-# 📱 Matjido
+# Matjido
 
 React Native로 개발된 맛집 지도 기반 모바일 애플리케이션입니다.
 
