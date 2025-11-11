@@ -1,0 +1,88 @@
+diff --git a/node_modules/react-native-map-clustering/lib/ClusteredMapView.js b/node_modules/react-native-map-clustering/lib/ClusteredMapView.js
+index 8c7820c..d5f16be 100644
+--- a/node_modules/react-native-map-clustering/lib/ClusteredMapView.js
++++ b/node_modules/react-native-map-clustering/lib/ClusteredMapView.js
+@@ -136,9 +136,6 @@ const ClusteredMapView = forwardRef(
+         const bBox = calculateBBox(region);
+         const zoom = returnMapZoom(region, bBox, minZoom);
+         const markers = superCluster.getClusters(bBox, zoom);
+-        if (animationEnabled && Platform.OS === "ios") {
+-          LayoutAnimation.configureNext(layoutAnimationConf);
+-        }
+         if (zoom >= 18 && markers.length > 0 && clusterChildren) {
+           if (spiralEnabled) updateSpiderfier(true);
+         } else {
+diff --git a/node_modules/react-native-map-clustering/lib/ClusteredMarker.js b/node_modules/react-native-map-clustering/lib/ClusteredMarker.js
+index 73700ba..e391e0f 100644
+--- a/node_modules/react-native-map-clustering/lib/ClusteredMarker.js
++++ b/node_modules/react-native-map-clustering/lib/ClusteredMarker.js
+@@ -26,46 +26,47 @@ const ClusteredMarker = ({
+       onPress={onPress}
+       tracksViewChanges={tracksViewChanges}
+     >
+-      <TouchableOpacity
+-        activeOpacity={0.5}
++      <View
+         style={[styles.container, { width, height }]}
+       >
+-        <View
+-          style={[
+-            styles.wrapper,
+-            {
+-              backgroundColor: clusterColor,
+-              width,
+-              height,
+-              borderRadius: width / 2,
+-            },
+-          ]}
+-        />
+         <View
+           style={[
+             styles.cluster,
+             {
+-              backgroundColor: clusterColor,
++              borderWidth: 2,
++              borderColor: clusterColor,
+               width: size,
+               height: size,
+               borderRadius: size / 2,
+             },
+           ]}
+         >
+-          <Text
++          <View
+             style={[
+-              styles.text,
++              styles.cluster,
+               {
+-                color: clusterTextColor,
+-                fontSize,
+-                fontFamily: clusterFontFamily,
++                backgroundColor: clusterColor,
++                width: size - 14,
++                height: size - 14,
++                borderRadius: (size - 14) / 2,
+               },
+             ]}
+           >
+-            {points}
+-          </Text>
++            <Text
++              style={[
++                styles.text,
++                {
++                  color: clusterTextColor,
++                  fontSize,
++                  fontFamily: clusterFontFamily,
++                },
++              ]}
++              >
++              {points}
++            </Text>
++          </View>
+         </View>
+-      </TouchableOpacity>
++      </View>
+     </Marker>
+   );
+ };
